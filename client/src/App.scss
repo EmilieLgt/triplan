@@ -1,0 +1,31 @@
+:root {
+  --first-color: #ff7828;
+  --second-color: #fae252;
+  --third-color: #aebc1b;
+  --light-color: #fff1f3;
+  --text-font: "Questrial";
+  --title-font: "Chau Philomene One";
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--text-font);
+  line-height: 40px;
+}
+
+.span-orange {
+  color: var(--first-color);
+}
+.span-yellow {
+  color: var(--second-color);
+}
+.span-green {
+  color: var(--third-color);
+}
+button {
+  font-family: var(--text-font);
+}
+
+button:hover {
+  cursor: pointer;
+}
