@@ -1,0 +1,91 @@
+.login-page {
+  display: flex;
+  flex-direction: row;
+}
+
+.login-decorative {
+  background-color: var(--first-color);
+  height: 100vh;
+  width: 50%;
+  position: relative;
+  .logo {
+    width: 10%;
+    position: absolute;
+    left: 5%;
+    top: 70%;
+  }
+}
+.login-decorative-yellow {
+  width: 200px;
+  height: 200px;
+  background-color: var(--second-color);
+  border-radius: 100%;
+  position: absolute;
+  left: 25%;
+  top: 60%;
+}
+.login-decorative-pink {
+  width: 100px;
+  height: 100px;
+  background-color: var(--light-color);
+  border-radius: 100%;
+  position: absolute;
+  left: 20%;
+  top: 45%;
+}
+.login-decorative-green {
+  width: 50px;
+  height: 50px;
+  background-color: var(--third-color);
+  border-radius: 100%;
+  position: absolute;
+  left: 45%;
+  top: 50%;
+}
+h1 {
+  font-family: var(--title-font);
+  color: white;
+  font-size: 9em;
+  text-align: center;
+  margin-left: 1em;
+}
+.login-form {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h3 {
+    font-weight: bold;
+    color: var(--first-color);
+  }
+  form {
+    margin-right: 20%;
+    margin-top: 5%;
+    button {
+      border: none;
+      background-color: var(--first-color);
+      color: white;
+      padding: 0.5em;
+      padding-right: 1em;
+      padding-left: 1em;
+      border-radius: 25px;
+      margin-top: 20px;
+      margin-left: 60%;
+      font-size: 1.2em;
+      margin-bottom: 1em;
+    }
+  }
+  input {
+    background-color: var(--light-color);
+    border: none;
+    border-radius: 20px;
+    width: 150%;
+    height: 2em;
+    padding: 1em;
+  }
+}
+.login-text {
+  font-size: 2em;
+  text-align: center;
+}
