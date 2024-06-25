@@ -7,6 +7,12 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ProfilePage from "./pages/ProfilePage";
 
+const getData = async () => {
+  const result = await fetch("https://randomuser.me/api/?nat=gb");
+  const datas = await result.json();
+  return datas;
+};
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -16,7 +22,7 @@ const router = createBrowserRouter([
     path: "/register",
     element: <RegisterPage />,
   },
-  { path: "/profile", element: <ProfilePage /> },
+  { path: "/profile", element: <ProfilePage />, loader: () => getData() },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

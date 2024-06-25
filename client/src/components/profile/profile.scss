@@ -1,0 +1,100 @@
+/* whole profile page */
+
+.whole-page-profile {
+  background-color: var(--light-color);
+  position: relative;
+  padding-top: 1em;
+  padding-left: 1em;
+}
+
+/* avatar and name */
+.avatar-info-container {
+  img {
+    border-radius: 100%;
+    position: absolute;
+    z-index: 99;
+    height: 170px;
+    top: 10px;
+    left: 40px;
+  }
+}
+.avatar-text {
+  font-family: var(--title-font);
+}
+.avatar-name {
+  font-size: 2em;
+  position: absolute;
+  z-index: 99;
+  height: 150px;
+  top: 200px;
+  left: 90px;
+}
+.avatar-mail {
+  text-decoration: underline;
+  position: absolute;
+  z-index: 99;
+  height: 150px;
+  top: 230px;
+  left: 90px;
+}
+
+.yellow-round {
+  background-color: var(--second-color);
+  height: 300px;
+  width: 300px;
+  border-radius: 100%;
+}
+
+/* friends request */
+
+.friend-requests-container {
+  h3 {
+    font-family: var(--title-font);
+  }
+}
+
+.one-friend-request {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1em;
+
+  img {
+    border-radius: 100%;
+  }
+}
+
+.validate-button-friend-request {
+  border: none;
+  background-color: green;
+  border-radius: 100%;
+  color: white;
+  height: 20px;
+  width: 20px;
+}
+.suppress-button-friend-request {
+  border: none;
+  background-color: red;
+  border-radius: 100%;
+  color: white;
+  height: 20px;
+  width: 20px;
+}
+
+/* friends list */
+.friends-list-profile {
+  h3 {
+    font-family: var(--title-font);
+  }
+}
+
+.orange-round {
+  background-color: var(--first-color);
+  height: 500px;
+  width: 500px;
+  border-radius: 100%;
+  position: absolute;
+  top: 50%;
+  left: -100px;
+  z-index: -1;
+}
