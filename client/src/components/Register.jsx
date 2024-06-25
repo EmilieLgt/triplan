@@ -1,4 +1,5 @@
 import "./register.scss";
+import { Link } from "react-router-dom";
 
 export default function Register() {
   return (
@@ -88,7 +89,9 @@ export default function Register() {
           <label htmlFor="profilePicture">Profile Picture </label>
           <input type="file" id="profilePicture" name="profilePicture" />
         </div>
-        <button type="submit">Submit</button>
+        <Link to="/profile">
+          <button type="submit">Submit</button>
+        </Link>
       </div>
     </>
   );
