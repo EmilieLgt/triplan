@@ -5,6 +5,7 @@
   position: relative;
   padding-top: 1em;
   padding-left: 1em;
+  height: 200vh;
 }
 
 /* avatar and name */
@@ -83,6 +84,9 @@
 
 /* friends list */
 .friends-list-profile {
+  position: absolute;
+  top: 550px;
+  z-index: 9999;
   h3 {
     font-family: var(--title-font);
   }
@@ -94,7 +98,18 @@
   width: 500px;
   border-radius: 100%;
   position: absolute;
-  top: 50%;
-  left: -100px;
-  z-index: -1;
+  z-index: 20;
+  top: 500px;
+  left: -150px;
+}
+
+.add-friend {
+  border: none;
+  background-color: var(--second-color);
+  color: white;
+  font-size: 2em;
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  margin-top: 1em;
 }

@@ -5,6 +5,7 @@ import Avatar from "../components/profile/Avatar";
 import "../components/profile/profile.scss";
 import FriendsRequests from "../components/profile/FriendsRequests";
 import FriendsList from "../components/profile/FriendsList";
+import TripsList from "../components/profile/trips/TripsList";
 
 export default function ProfilePage() {
   const user = useLoaderData();
@@ -16,6 +17,7 @@ export default function ProfilePage() {
         <Avatar user={user} />
         <FriendsRequests user={user} />
         <FriendsList user={user} />
+        <TripsList />
       </div>
       <Footer />
     </>
