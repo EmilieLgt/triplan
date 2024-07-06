@@ -14,10 +14,21 @@ export default function ProfilePage() {
     <>
       <Header />
       <div className="whole-page-profile">
-        <Avatar user={user} />
-        <FriendsRequests user={user} />
-        <FriendsList user={user} />
-        <TripsList />
+        <div>
+          <Avatar user={user} />
+          <FriendsRequests user={user} />
+          <FriendsList user={user} />
+          <div className="add-friend-container">
+            {" "}
+            <button type="button" className="add-friend">
+              +
+            </button>{" "}
+            Add a friend
+          </div>
+        </div>
+        <div>
+          <TripsList user={user} />
+        </div>
       </div>
       <Footer />
     </>

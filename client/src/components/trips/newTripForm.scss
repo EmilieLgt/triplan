@@ -1,0 +1,98 @@
+.trip-form-section {
+  margin-top: 5em;
+  height: 100vh;
+  margin: auto;
+  h2 {
+    font-family: "Chau Philomene One";
+    color: var(--first-color);
+    text-align: center;
+    font-size: 3em;
+  }
+
+  form {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-left: 20%;
+  }
+  input {
+    background-color: var(--light-color);
+    border: none;
+    border-radius: 20px;
+    height: 2em;
+    padding: 0.5em;
+  }
+  label {
+    font-weight: bold;
+  }
+
+  .input-trip-placedate {
+    width: 30vw;
+    margin-right: 3em;
+  }
+
+  button {
+    width: 200px;
+    border-radius: 50px;
+    font-size: 1.2em;
+    color: white;
+    background-color: var(--first-color);
+    border: none;
+    padding: 1em;
+    margin-left: 45%;
+    margin-top: 1em;
+  }
+}
+.checkbox-div {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.friends-section-trip-plan {
+  display: flex;
+}
+
+.add-friends-txt {
+  color: var(--first-color);
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+  margin: auto;
+}
+.date-place-trip-plan {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.part-2-form {
+  display: flex;
+  flex-direction: column;
+  input {
+    background-color: transparent;
+    padding: 1em;
+  }
+  input[type="file"]::file-selector-button {
+    background-color: var(--first-color);
+    color: white;
+    border: none;
+    padding: 0.8em;
+    border-radius: 25px;
+  }
+}
+
+.friends-section-trip-plan {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: space-evenly;
+}
+
+.avatar-trip-form {
+  border-radius: 100%;
+  object-fit: fit-content;
+  height: 70px;
+  width: 70px;
+}
