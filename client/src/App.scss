@@ -1,9 +1,9 @@
 :root {
   --first-color: #ff7828;
-  --second-color: #fae252;
-  --third-color: #aebc1b;
-  --light-color: #fff1f3;
-  --text-font: "Questrial";
+  --second-color: #f2d73b;
+  --third-color: #87b052;
+  --light-color: #fbf8f2;
+  --text-font: "Work Sans";
   --title-font: "Chau Philomene One";
 }
 body {
@@ -13,6 +13,10 @@ body {
   line-height: 40px;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
 .span-orange {
   color: var(--first-color);
 }

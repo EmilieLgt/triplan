@@ -1,15 +1,17 @@
 .text-register {
   text-align: center;
-  height: 100vh;
+  height: 40vh;
+  background-color: var(--light-color);
+  padding-top: 2em;
   h2 {
     color: var(--second-color);
     font-size: 4em;
   }
   .register-logo {
     position: absolute;
-    width: 40%;
+    width: 30%;
     left: 0%;
-    top: 30%;
+    top: 10%;
   }
   .login-decorative-pink {
     width: 300px;
@@ -18,17 +20,15 @@
 }
 .register-p1 {
   margin-left: 10%;
-  margin-top: 10%;
   font-size: 1.5em;
+  margin-top: 5%;
 }
 .register-p2 {
-  margin-left: 30%;
-  margin-top: 10%;
+  margin-left: 10%;
   font-size: 1.5em;
 }
 .register-p3 {
-  margin-left: 50%;
-  margin-top: 10%;
+  margin-left: 30%;
   font-size: 1.5em;
 }
 
@@ -82,4 +82,7 @@
     border-radius: 25px;
     padding-bottom: 1em;
   }
+}
+.register-page {
+  background-color: var(--light-color);
 }

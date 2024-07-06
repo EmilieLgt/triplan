@@ -12,7 +12,7 @@ export default function Header() {
       </div>
       <Link to="/profile" className="profile-button-header" id="profile-header">
         <img
-          src="../src/assets/images/profile-header.svg"
+          src="../src/assets/images/user-profile2.svg"
           id="profile-pic-header"
           alt="profile"
         />

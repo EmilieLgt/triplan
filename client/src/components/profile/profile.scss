@@ -5,6 +5,7 @@
   position: relative;
   padding-top: 1em;
   padding-left: 1em;
+  display: flex;
   height: 200vh;
 }
 
@@ -84,16 +85,13 @@
 
 /* friends list */
 .friends-list-profile {
-  position: absolute;
-  top: 550px;
-  z-index: 9999;
   h3 {
     font-family: var(--title-font);
   }
 }
 
 .orange-round {
-  background-color: var(--first-color);
+  background-color: var(--second-color);
   height: 500px;
   width: 500px;
   border-radius: 100%;
@@ -105,11 +103,83 @@
 
 .add-friend {
   border: none;
-  background-color: var(--second-color);
+  background-color: var(--third-color);
   color: white;
   font-size: 2em;
   height: 50px;
   width: 50px;
   border-radius: 50px;
   margin-top: 1em;
+}
+/* trip list */
+.trip-list-section {
+  margin-left: 10%;
+
+  h2 {
+    font-family: var(--title-font);
+    color: var(--first-color);
+    font-size: 3em;
+  }
+}
+
+.trip-list-all-trips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  gap: 5%;
+  margin-right: 5%;
+}
+.trip-list-one-trip {
+  img {
+    border-radius: 10px;
+    width: 400px;
+    object-fit: contain;
+  }
+
+  .trip-list-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    gap: -1em;
+    margin-bottom: 1em;
+    h4 {
+      margin: 0;
+      font-size: 2em;
+    }
+    .trip-list-dates-one-trip {
+      color: var(--first-color);
+      font-style: italic;
+      margin: 0;
+    }
+    .trip-list-statut {
+      display: inline;
+      background-color: var(--third-color);
+      text-align: center;
+      width: 20%;
+      color: white;
+      font-size: 0.6em;
+      border-radius: 25px;
+    }
+    .trip-title-status {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+}
+.link-new-trip {
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+  color: var(--first-color);
+  .plus-button {
+    background-color: var(--first-color);
+    border-radius: 100%;
+    color: white;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    margin-right: 0.5em;
+  }
 }
