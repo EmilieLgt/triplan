@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Avatar from "../components/profile/Avatar";
@@ -20,10 +20,12 @@ export default function ProfilePage() {
           <FriendsList user={user} />
           <div className="add-friend-container">
             {" "}
-            <button type="button" className="add-friend">
-              +
-            </button>{" "}
-            Add a friend
+            <Link to="/friends">
+              <button type="button" className="add-friend">
+                +
+              </button>{" "}
+              Add a friend
+            </Link>
           </div>
         </div>
         <div>
