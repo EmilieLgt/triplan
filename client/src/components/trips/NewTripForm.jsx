@@ -65,22 +65,26 @@ export default function NewTripForm() {
         <div className="friends-section-trip-plan">
           {" "}
           <FriendsList user={user} />
-          Friends added
-          <img
-            src={user.results[0].picture.large}
-            alt=""
-            className="avatar-trip-form"
-          />
-          <img
-            src={user.results[0].picture.large}
-            alt=""
-            className="avatar-trip-form"
-          />
-          <img
-            src={user.results[0].picture.large}
-            alt=""
-            className="avatar-trip-form"
-          />
+          <div className="friends-list-added-trip">
+            <h3>Friends added</h3>
+            <div>
+              <img
+                src={user.results[0].picture.large}
+                alt=""
+                className="avatar-trip-form"
+              />
+              <img
+                src={user.results[0].picture.large}
+                alt=""
+                className="avatar-trip-form"
+              />
+              <img
+                src={user.results[0].picture.large}
+                alt=""
+                className="avatar-trip-form"
+              />
+            </div>
+          </div>
         </div>
 
         <button className="add-trip" type="button">

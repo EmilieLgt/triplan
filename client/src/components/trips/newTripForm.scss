@@ -50,9 +50,6 @@
   justify-content: start;
   align-items: center;
 }
-.friends-section-trip-plan {
-  display: flex;
-}
 
 .add-friends-txt {
   color: var(--first-color);
@@ -60,6 +57,7 @@
   font-weight: bold;
   text-align: center;
   margin: auto;
+  font-family: var(--title-font);
 }
 .date-place-trip-plan {
   display: flex;
@@ -75,24 +73,42 @@
     padding: 1em;
   }
   input[type="file"]::file-selector-button {
-    background-color: var(--first-color);
+    background-color: var(--second-color);
     color: white;
     border: none;
     padding: 0.8em;
     border-radius: 25px;
+    cursor: pointer;
   }
 }
 
 .friends-section-trip-plan {
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   justify-content: space-evenly;
   align-items: space-evenly;
 }
 
+.friends-list-added-trip {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  flex-wrap: wrap;
+
+  h3 {
+    font-family: var(--title-font);
+  }
+}
 .avatar-trip-form {
   border-radius: 100%;
   object-fit: fit-content;
   height: 70px;
   width: 70px;
+  border: 2px solid var(--third-color);
+  margin-left: 0.5em;
+}
+
+.picture-label {
+  font-weight: bolder;
 }
