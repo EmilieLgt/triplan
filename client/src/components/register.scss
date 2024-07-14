@@ -86,3 +86,77 @@
 .register-page {
   background-color: var(--light-color);
 }
+@media screen and (max-width: 990px) {
+  .text-register {
+    text-align: center;
+    height: fit-content;
+    background-color: var(--light-color);
+    padding-top: 2em;
+
+    h2 {
+      margin: 0.3em;
+      font-size: 2em;
+    }
+    div {
+      padding-left: 1em;
+      padding-right: 1em;
+      font-size: 1em;
+    }
+    .register-logo {
+      position: inherit;
+      width: 50%;
+    }
+  }
+  .register-p1 {
+    margin: 0;
+  }
+  .register-p2 {
+    margin: 0;
+  }
+  .register-p3 {
+    margin: 0;
+  }
+
+  .form-register {
+    form {
+      text-align: left;
+      display: flex;
+      height: fit-content;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 90%;
+      margin: 0;
+    }
+    h2 {
+      font-family: var(--title-font);
+      color: var(--first-color);
+      font-size: 3em;
+      text-align: center;
+    }
+    .input-register {
+      background-color: var(--light-color);
+      border: none;
+      border-radius: 20px;
+      height: 2em;
+      padding: 1em;
+      width: 100%;
+    }
+    .legals {
+      width: 90%;
+      margin: auto;
+    }
+
+    .register-picture-container {
+      background-color: var(--light-color);
+      width: 80%;
+      margin: 1em auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: 25px;
+      padding-bottom: 1em;
+    }
+  }
+}

@@ -40,7 +40,10 @@
 .whole-footer {
   background-color: var(--second-color);
   color: white;
-  //  position: fixed;
-  // width: 100%;
-  //  bottom: 0%;
+}
+
+@media screen and (max-width: 990px) {
+  .destktop-header {
+    display: none;
+  }
 }

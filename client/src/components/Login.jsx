@@ -15,6 +15,7 @@ export default function Login() {
           className="logo"
         />
       </section>
+      <section className="login-decorative-mobile">triplan</section>
       <section className="login-form">
         <div className="login-text">
           <span className="span-yellow">Plan</span> your activities for your
@@ -34,8 +35,12 @@ export default function Login() {
           </label>
           <button type="button">Login</button>
         </form>
-        <div>
-          No account yet ? <Link to="/register"> Sign up !</Link>
+        <div className="register">
+          No account yet ?{" "}
+          <Link to="/register" className="link-register">
+            {" "}
+            Sign up !
+          </Link>
         </div>
       </section>
     </div>
