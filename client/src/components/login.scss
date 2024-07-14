@@ -90,3 +90,49 @@
   font-size: 2em;
   text-align: center;
 }
+.login-decorative-mobile {
+  display: none;
+}
+.link-register {
+  color: var(--first-color);
+  text-decoration: underline;
+}
+@media screen and (max-width: 990px) {
+  .login-decorative {
+    display: none;
+  }
+  .login-page {
+    display: initial;
+  }
+  .login-decorative-mobile {
+    background-color: var(--first-color);
+    color: white;
+    text-align: center;
+    font-family: var(--title-font);
+    height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3em;
+  }
+  .login-form {
+    display: initial;
+    input {
+      width: 80vw;
+    }
+    form {
+      padding-left: 5vw;
+      button {
+        margin: 1em 5em;
+      }
+    }
+  }
+  .login-text {
+    font-size: 1.3em;
+    width: 80vw;
+    margin: 1em auto;
+  }
+  .register {
+    text-align: center;
+  }
+}

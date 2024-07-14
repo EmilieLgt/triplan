@@ -30,7 +30,9 @@ export default function Register() {
       </div>{" "}
       <div className="form-register">
         <h2>Register</h2>
-        Your name, surname and picture will be visible by other users
+        <p className="legals">
+          Your name, surname and picture will be visible by other users
+        </p>
         <form>
           <div>
             <div>

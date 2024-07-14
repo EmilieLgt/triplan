@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import NewActivityForm from "./NewActivityForm";
 import "./trip.scss";
 
 export default function OneTrip({ user }) {
@@ -283,7 +282,6 @@ export default function OneTrip({ user }) {
           </div>
         </div>
       </div>
-      <NewActivityForm />
     </section>
   );
 }
