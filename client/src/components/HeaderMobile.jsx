@@ -10,7 +10,7 @@ export default function HeaderMobile() {
         </Link>
       </div>
       <div className="logo-header">
-        <Link to="/friends" className="links-header">
+        <Link to="/new-trip" className="links-header">
           <img
             src="../src/assets/images/plus-circle.svg"
             id="profile-pic-header-mobile"

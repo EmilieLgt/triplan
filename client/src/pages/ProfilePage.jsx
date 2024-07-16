@@ -12,7 +12,7 @@ export default function ProfilePage() {
   const user = useLoaderData();
 
   return (
-    <>
+    <div className="profile-page-container">
       <Header />
       <HeaderMobile />
       <div className="whole-page-profile">
@@ -35,6 +35,6 @@ export default function ProfilePage() {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }

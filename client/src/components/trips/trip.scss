@@ -188,3 +188,27 @@
     margin: auto;
   }
 }
+
+@media screen and (max-width: 990px) {
+  .one-trip-title {
+    margin: 0 1em;
+    font-size: 2em;
+  }
+
+  .link-to-profile {
+    display: none;
+  }
+  .one-trip-section {
+    margin-top: 8em;
+  }
+  .trip-page {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+  }
+
+  .trip-presentation {
+    display: flex;
+    flex-direction: column;
+  }
+}

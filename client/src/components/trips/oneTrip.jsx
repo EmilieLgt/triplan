@@ -121,7 +121,11 @@ export default function OneTrip({ user }) {
     <section className="one-trip-section">
       <h2 className="one-trip-title">
         {" "}
-        <Link to="/profile"> &lsaquo; </Link>Trip planning
+        <Link to="/profile" className="link-to-profile">
+          {" "}
+          &lsaquo;{" "}
+        </Link>
+        Trip planning
       </h2>
       {tripsFake.map((trip) => (
         <div key={trip.id} className="trip-presentation">
