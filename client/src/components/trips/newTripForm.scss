@@ -112,3 +112,30 @@
 .picture-label {
   font-weight: bolder;
 }
+
+@media screen and (max-width: 990px) {
+  .trip-form-section {
+    margin-top: 7em;
+    form {
+      margin-left: 2%;
+      input {
+        margin: 0;
+      }
+    }
+    .input-trip-placedate {
+      width: fit-content;
+      margin-right: 1em;
+    }
+    button {
+      width: 150px;
+      border-radius: 50px;
+      font-size: 1.2em;
+      color: white;
+      background-color: var(--first-color);
+      border: none;
+      padding: 1em;
+      margin-left: 25%;
+      margin-top: 0;
+    }
+  }
+}

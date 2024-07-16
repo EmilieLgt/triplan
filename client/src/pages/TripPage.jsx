@@ -8,12 +8,12 @@ import NewActivityForm from "../components/trips/NewActivityForm";
 export default function TripPage() {
   const user = useLoaderData();
   return (
-    <>
+    <div className="trip-page">
       <Header />
       <HeaderMobile />
       <OneTrip user={user} />
       <NewActivityForm />
       <Footer />
-    </>
+    </div>
   );
 }

@@ -3,6 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import Header from "../Header";
 import Footer from "../Footer";
 import FriendsList from "../profile/FriendsList";
+import HeaderMobile from "../HeaderMobile";
 
 export default function NewTripForm() {
   const user = useLoaderData();
@@ -10,6 +11,7 @@ export default function NewTripForm() {
   return (
     <>
       <Header />
+      <HeaderMobile />
       <section className="trip-form-section">
         <h2> Add a new trip</h2>
         <form>

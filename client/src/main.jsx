@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./App.scss";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
+import App from "./App";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ProfilePage from "./pages/ProfilePage";
@@ -17,12 +17,21 @@ const getData = async () => {
 };
 
 const router = createBrowserRouter([
-  { path: "/", element: <LoginPage /> },
-  { path: "/register", element: <RegisterPage /> },
-  { path: "/profile", element: <ProfilePage />, loader: () => getData() },
-  { path: "/trip", element: <TripPage />, loader: () => getData() },
-  { path: "/new-trip", element: <NewTripForm />, loader: () => getData() },
-  { path: "/friends", element: <FriendsGestion />, loader: () => getData() },
+  {
+    element: <App />,
+    children: [
+      { path: "/", element: <LoginPage /> },
+      { path: "/register", element: <RegisterPage /> },
+      { path: "/profile", element: <ProfilePage />, loader: () => getData() },
+      { path: "/trip", element: <TripPage />, loader: () => getData() },
+      { path: "/new-trip", element: <NewTripForm />, loader: () => getData() },
+      {
+        path: "/friends",
+        element: <FriendsGestion />,
+        loader: () => getData(),
+      },
+    ],
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
