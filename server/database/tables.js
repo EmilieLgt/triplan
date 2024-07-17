@@ -1,5 +1,9 @@
 // Import the repository modules responsible for handling data operations on the tables
 const AccountRepository = require("./models/AccountRepository");
+const TravelRepository = require("./models/TravelRepository");
+const ActivityRepository = require("./models/ActivityRepository");
+const OperationAssociationRepository = require("./models/OperationAssociationRepository");
+const OperationFriendRepository = require("./models/OperationFriendRepository");
 
 // Create an empty object to hold data repositories for different tables
 const tables = {};
@@ -10,7 +14,10 @@ const tables = {};
 
 // Register each repository as data access point for its table
 tables.account = new AccountRepository();
-
+tables.travel = new TravelRepository();
+tables.activity = new ActivityRepository();
+tables.operation_association = new OperationAssociationRepository();
+tables.operation_friend = new OperationFriendRepository();
 /* ************************************************************************* */
 
 // Use a Proxy to customize error messages when trying to access a non-existing table

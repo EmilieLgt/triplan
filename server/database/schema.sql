@@ -4,7 +4,7 @@ CREATE TABLE account (
   lastname VARCHAR(255) NOT NULL,
   email VARCHAR(255) UNIQUE NOT NULL,
   password VARCHAR(500) NOT NULL,
-  picture VARCHAR(500) NOT NULL
+  picture VARCHAR(2000) NOT NULL
 );
 
 CREATE TABLE travel (
@@ -12,7 +12,8 @@ CREATE TABLE travel (
   city VARCHAR(255) NOT NULL,
   date_start DATE NOT NULL,
   date_end DATE NOT NULL,
-  picture VARCHAR(255) NOT NULL,
+  picture VARCHAR(1000) NOT NULL,
+  state  VARCHAR(255) NOT NULL,
   account_id INT UNSIGNED NOT NULL,
   FOREIGN KEY (account_id) REFERENCES account(id)
 );
@@ -20,6 +21,7 @@ CREATE TABLE travel (
 CREATE TABLE activity (
   id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
   name VARCHAR(255) NOT NULL,
+  category VARCHAR(255) NOT NULL,
   price VARCHAR(50) NOT NULL,
   neighborhood VARCHAR(250) NOT NULL,
   link VARCHAR(2000) NOT NULL,

@@ -1,6 +1,5 @@
 .trip-form-section {
   margin-top: 5em;
-  height: 100vh;
   margin: auto;
   h2 {
     font-family: "Chau Philomene One";
@@ -10,13 +9,13 @@
   }
 
   form {
-    margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    margin-left: 20%;
+    margin-left: 35%;
   }
+
   input {
     background-color: var(--light-color);
     border: none;
@@ -61,7 +60,7 @@
 }
 .date-place-trip-plan {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
 }
 

@@ -41,6 +41,51 @@ class AccountRepository extends AbstractRepository {
     return rows;
   }
 
+  async readByEmail(email) {
+    const [accountRows] = await this.database.query(
+      `
+      SELECT
+        a.id,
+        a.firstname,
+        a.lastname,
+        a.email,
+        a.password,
+        a.picture
+      FROM
+        account a
+      WHERE
+        a.email = ?
+      `,
+      [email]
+    );
+    return accountRows;
+  }
+
+  async readWithTrips(id) {
+    const [rows] = await this.database.query(
+      `SELECT
+        a.firstname,
+        a.lastname,
+        a.email,
+        a.password,
+        a.picture,
+        t.id AS travel_id,
+        t.city,
+        t.date_start,
+        t.date_end,
+        t.state
+        t.picture AS travel_picture
+      FROM
+        account a
+       LEFT JOIN travel t ON a.id = t.account_id   
+       WHERE
+        a.id = ? 
+      `,
+      [id]
+    );
+    return rows[0];
+  }
+
   async update(account) {
     const [result] = await this.database.query(
       `update ${this.table} set firstname = ?, lastname = ?, email = ?, password = ?, picture = ? where id = ?`,

@@ -1,36 +1,24 @@
-import PropTypes from "prop-types";
+import { useContext } from "react";
+import { AllContext } from "../../AllContext";
 import "./profile.scss";
 
-export default function FriendsRequests({ user }) {
+export default function FriendsRequests() {
+  const { pendingFriends } = useContext(AllContext);
   return (
     <div className="friend-requests-container">
       <h3>Friends Requests</h3>
-      <div className="one-friend-request">
-        <img src={user.results[0].picture.thumbnail} alt="profile" />
-        {user.results[0].name.first} {user.results[0].name.last}
-        <button className="validate-button-friend-request" type="button">
-          v
-        </button>
-        <button className="suppress-button-friend-request" type="button">
-          x
-        </button>
-      </div>
+      {pendingFriends.map((friend) => (
+        <div className="one-friend-request" key={friend.account_id1}>
+          <img src={friend.picture} alt="profile" />
+          {friend.firstname} {friend.lastname}
+          <button className="validate-button-friend-request" type="button">
+            v
+          </button>
+          <button className="suppress-button-friend-request" type="button">
+            x
+          </button>
+        </div>
+      ))}
     </div>
   );
 }
-
-FriendsRequests.propTypes = {
-  user: PropTypes.shape({
-    results: PropTypes.arrayOf(
-      PropTypes.shape({
-        picture: PropTypes.shape({
-          thumbnail: PropTypes.string.isRequired,
-        }).isRequired,
-        name: PropTypes.shape({
-          first: PropTypes.string.isRequired,
-          last: PropTypes.string.isRequired,
-        }).isRequired,
-      })
-    ).isRequired,
-  }).isRequired,
-};
