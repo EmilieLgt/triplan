@@ -5,8 +5,9 @@ const router = express.Router();
 // Import item-related actions
 const {
   browse,
-  read,
   readByLetters,
+  readWithTripsAndFriends,
+  read,
   add,
 } = require("../../../controllers/accountActions");
 
@@ -15,6 +16,16 @@ router.get("/", browse);
 
 // Route to get accounts by letter
 router.get("/search", readByLetters);
+
+// Router to get trips and friends from id
+
+router.get("/info/:id", readWithTripsAndFriends);
+
+// Routes to login
+
+const { login } = require("../../../controllers/authActions");
+
+router.post("/login", login);
 
 // Route to get a specific item by ID
 router.get("/:id", read);

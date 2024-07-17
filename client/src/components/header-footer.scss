@@ -5,6 +5,18 @@
   align-items: center;
   padding-left: 5%;
   padding-right: 5%;
+  position: relative;
+  .counter-friends-request {
+    color: var(--second-color);
+    line-height: normal;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .friends-button-header {
+    background-color: transparent;
+    border: 0;
+  }
 
   h1 {
     font-family: var(--title-font);
@@ -25,21 +37,36 @@
   #profile-header {
     border: 2px solid white;
     padding-left: 1em;
-    padding-right: 1em;
     border-radius: 25px;
   }
   img {
     max-height: 40px;
     margin-right: 1em;
   }
-  #profile-pic-header {
-    height: 30px;
-  }
 }
-
+.buttons-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .whole-footer {
   background-color: var(--second-color);
   color: white;
+}
+
+.friends-request-container-header {
+  position: absolute;
+  top: 11%;
+  left: 70%;
+  z-index: 99999999;
+  border-radius: 15px;
+  background-color: white;
+  border: 2px solid var(--second-color);
+  padding: 0.5em;
+  h3 {
+    text-align: center;
+    color: var(--second-color);
+  }
 }
 
 @media screen and (max-width: 990px) {

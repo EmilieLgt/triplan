@@ -1,38 +1,19 @@
-import PropTypes from "prop-types";
+import { useContext } from "react";
+import { AllContext } from "../../AllContext";
+
 import "./profile.scss";
 
-export default function FriendsList({ user }) {
+export default function FriendsList() {
+  const { userFriends } = useContext(AllContext);
   return (
     <div className="friends-list-profile">
-      <h3>My triplan friends</h3>
-      <div className="one-friend-request">
-        <img src={user.results[0].picture.thumbnail} alt="friend" />
-        {user.results[0].name.first} {user.results[0].name.last}
-      </div>
-      <div className="one-friend-request">
-        <img src={user.results[0].picture.thumbnail} alt="friend" />
-        {user.results[0].name.first} {user.results[0].name.last}
-      </div>
-      <div className="one-friend-request">
-        <img src={user.results[0].picture.thumbnail} alt="friend" />
-        {user.results[0].name.first} {user.results[0].name.last}
-      </div>
+      {userFriends &&
+        userFriends.map((friend) => (
+          <div className="one-friend-request" key={friend.account2_id}>
+            <img src={friend.picture} alt="friend" />
+            {friend.firstname} {friend.lastname}
+          </div>
+        ))}
     </div>
   );
 }
-
-FriendsList.propTypes = {
-  user: PropTypes.shape({
-    results: PropTypes.arrayOf(
-      PropTypes.shape({
-        picture: PropTypes.shape({
-          thumbnail: PropTypes.string.isRequired,
-        }).isRequired,
-        name: PropTypes.shape({
-          first: PropTypes.string.isRequired,
-          last: PropTypes.string.isRequired,
-        }).isRequired,
-      })
-    ).isRequired,
-  }).isRequired,
-};
