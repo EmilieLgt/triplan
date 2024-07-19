@@ -66,10 +66,27 @@ const add = async (req, res, next) => {
   }
 };
 
+// EDIT
+const edit = async (req, res, next) => {
+  const updatedRequest = req.body;
+  try {
+    const affectedRows =
+      await tables.operation_friend.updateOnReceiving(updatedRequest);
+    if (affectedRows > 0) {
+      res.sendStatus(204);
+    } else {
+      res.status(404).json({ message: "Request not found or no changes made" });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   browse,
   read,
   readFriendsFromRequest,
   readFriendsPostRequest,
   add,
+  edit,
 };

@@ -23,9 +23,24 @@ const read = async (req, res, next) => {
   }
 };
 
-// ADD
+const readByTravel = async (req, res, next) => {
+  const travelId = req.query.travel_id;
+  try {
+    const association =
+      await tables.operation_association.readWithTravel(travelId);
+    if (association == null) {
+      res.sendStatus(404);
+    } else {
+      res.status(200).json(association);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 const add = async (req, res, next) => {
   const association = req.body;
+
   try {
     const insertId = await tables.operation_association.create(association);
     res.status(201).json({ insertId });
@@ -37,5 +52,6 @@ const add = async (req, res, next) => {
 module.exports = {
   browse,
   read,
+  readByTravel,
   add,
 };

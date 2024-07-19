@@ -9,6 +9,7 @@ const {
   readFriendsFromRequest,
   readFriendsPostRequest,
   add,
+  edit,
 } = require("../../../controllers/friendActions");
 
 // Route to get a list of items
@@ -27,6 +28,9 @@ router.get("/:id", read);
 
 // Route to add a new item
 router.post("/", add);
+
+// Router to edit friend request
+router.put("/", edit);
 
 /* ************************************************************************* */
 

@@ -30,7 +30,7 @@ router.post("/login", login);
 // Route to get a specific item by ID
 router.get("/:id", read);
 
-// Route to add a new item
+// Route to add
 router.post("/", add);
 
 /* ************************************************************************* */

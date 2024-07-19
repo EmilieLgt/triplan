@@ -12,7 +12,7 @@ class OperationFriendRepository extends AbstractRepository {
       [
         friendRequest.status,
         friendRequest.account_id1,
-        friendRequest.account_id1,
+        friendRequest.account_id2,
       ]
     );
     return result.insertId;
@@ -59,6 +59,18 @@ class OperationFriendRepository extends AbstractRepository {
     const [result] = await this.database.query(
       `delete from ${this.table} where id = ?`,
       [id]
+    );
+    return result.affectedRows;
+  }
+
+  async updateOnReceiving(friendRequest) {
+    const [result] = await this.database.query(
+      `UPDATE ${this.table} SET status = ? WHERE account_id1 = ? AND account_id2 = ?`,
+      [
+        friendRequest.state,
+        friendRequest.account_id1,
+        friendRequest.account_id2,
+      ]
     );
     return result.affectedRows;
   }

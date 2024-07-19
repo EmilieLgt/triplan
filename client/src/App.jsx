@@ -1,13 +1,16 @@
 import "./App.scss";
 import { Outlet } from "react-router-dom";
-import AllContextProvider from "./AllContext";
+import { useContext, useEffect } from "react";
+import { AllContext } from "./AllContext";
 
 function App() {
-  return (
-    <AllContextProvider>
-      <Outlet />
-    </AllContextProvider>
-  );
+  const { checkLoginStatus } = useContext(AllContext);
+
+  useEffect(() => {
+    checkLoginStatus();
+  }, [checkLoginStatus]);
+
+  return <Outlet />;
 }
 
 export default App;

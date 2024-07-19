@@ -5,7 +5,7 @@ import { AllContext } from "../AllContext";
 import FriendsRequests from "./profile/FriendsRequests";
 
 export default function Header() {
-  const { pendingFriends } = useContext(AllContext);
+  const { pendingFriends, logout } = useContext(AllContext);
 
   const [open, setOpen] = useState(false);
 
@@ -43,7 +43,12 @@ export default function Header() {
             <span />
           )}
 
-          <Link to="/" className="profile-button-header" id="profile-header">
+          <Link
+            to="/"
+            className="profile-button-header"
+            id="profile-header"
+            onClick={logout}
+          >
             Log out <img src="../src/assets/images/log-out.svg" alt="log out" />
           </Link>
         </div>

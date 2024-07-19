@@ -4,7 +4,7 @@ const tables = require("../../database/tables");
 const browse = async (req, res, next) => {
   try {
     const activities = await tables.activity.readAll();
-    res.json(activities);
+    res.status(201).json(activities);
   } catch (err) {
     next(err);
   }
@@ -23,7 +23,20 @@ const read = async (req, res, next) => {
   }
 };
 
-// ADD
+const readByTravel = async (req, res) => {
+  try {
+    const travelId = req.query.travel_id;
+    if (!travelId) {
+      return res.status(400).json({ message: "travel_id is required" });
+    }
+    const activities = await tables.activity.readWithTravel(travelId);
+    return res.status(200).json(activities);
+  } catch (err) {
+    console.error("Error in readByTravel:", err);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 const add = async (req, res, next) => {
   const activity = req.body;
   try {
@@ -37,5 +50,6 @@ const add = async (req, res, next) => {
 module.exports = {
   browse,
   read,
+  readByTravel,
   add,
 };
