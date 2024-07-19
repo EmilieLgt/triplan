@@ -8,12 +8,13 @@ class TravelRepository extends AbstractRepository {
   // The C of CRUD - Create operation
   async create(travel) {
     const [result] = await this.database.query(
-      `insert into ${this.table} (city, date_start, date_end, picture, state, account_id) values (?, ?, ?, ?, ?, ?)`,
+      `insert into ${this.table} (city, date_start, date_end,  picture, random, state, account_id) values (?, ?, ?, ?, ?, ?, ?)`,
       [
         travel.city,
         travel.date_start,
         travel.date_end,
-        travel.picture,
+        travel.picture || null,
+        travel.random,
         travel.state,
         travel.account_id,
       ]
@@ -39,21 +40,36 @@ class TravelRepository extends AbstractRepository {
 
   async readByUser(id) {
     const [rows] = await this.database.query(
-      `SELECT * FROM ${this.table} WHERE account_id = ?`,
-      [id]
+      `SELECT
+          t.*
+       FROM
+          travel t
+       WHERE
+          t.account_id = ?
+       UNION
+       SELECT
+          t.*
+       FROM
+          travel t
+       JOIN
+          operation_association oa ON t.id = oa.travel_id
+       WHERE
+          oa.account_id = ?`,
+      [id, id]
     );
     return rows;
   }
 
   async update(travel) {
     const [result] = await this.database.query(
-      `update ${this.table} set city = ?, date_start = ?, date_end = ?, picture = ?, state = ?, account_id = ? where id = ?`,
+      `update ${this.table} set city = ?, date_start = ?, date_end = ?, picture = ?, random = ? state = ?, account_id = ? where id = ?`,
       [
         travel.city,
         travel.date_start,
         travel.date_end,
         travel.state,
         travel.picture,
+        travel.random,
         travel.account_id,
       ]
     );

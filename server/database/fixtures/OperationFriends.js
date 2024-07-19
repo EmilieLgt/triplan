@@ -18,14 +18,19 @@ class OperationFriendSeeder extends AbstractSeeder {
         account_id2: this.getRef("account_john.smith@gmail.com").insertId,
       },
       {
+        status: "Pending",
+        account_id1: this.getRef("account_sabrina.olsen@gmail.com").insertId,
+        account_id2: this.getRef("account_john.smith@gmail.com").insertId,
+      },
+      {
         status: "Accepted",
         account_id1: this.getRef("account_john.smith@gmail.com").insertId,
         account_id2: this.getRef("account_emma.johnson@gmail.com").insertId,
       },
       {
         status: "Accepted",
-        account_id1: this.getRef("account_john.smith@gmail.com").insertId,
-        account_id2: this.getRef("account_olivia.taylor@gmail.com").insertId,
+        account_id1: this.getRef("account_harper.martinez@gmail.com").insertId,
+        account_id2: this.getRef("account_john.smith@gmail.com").insertId,
       },
       {
         status: "Accepted",

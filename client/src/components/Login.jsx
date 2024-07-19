@@ -4,17 +4,7 @@ import { useContext, useRef } from "react";
 import { AllContext } from "../AllContext";
 
 export default function Login() {
-  const {
-    setUser,
-    setUserTrips,
-    setFriendsAdded,
-    setOtherFriends,
-    friendsAdded,
-    otherFriends,
-    setUserFriends,
-    setPendingFriends,
-    successMessage,
-  } = useContext(AllContext);
+  const { login, successMessage } = useContext(AllContext);
   const navigate = useNavigate();
   const emailRef = useRef();
   const pswRef = useRef();
@@ -35,6 +25,7 @@ export default function Login() {
       );
 
       const data = await response.json();
+
       if (response.status === 200) {
         const tripsResponse = await fetch(
           `${import.meta.env.VITE_API_URL}/api/travel/user/${data.account.id}`
@@ -48,19 +39,14 @@ export default function Login() {
         const tripsData = await tripsResponse.json();
         const friendsFromRequestData = await friendsFromRequestReponse.json();
         const friendsPostRequestData = await friendsPostRequestReponse.json();
-        setUser(data.account);
-        setUserTrips(tripsData);
-        setFriendsAdded(friendsFromRequestData);
-        setOtherFriends(friendsPostRequestData);
-        const friends = [
-          ...friendsAdded.filter((friend) => friend.status === "Accepted"),
-          ...otherFriends.filter((friend) => friend.status === "Accepted"),
-        ];
-        const pendingRequest = otherFriends.filter(
-          (friend) => friend.status === "Pending"
+
+        login(
+          data.account,
+          tripsData,
+          friendsFromRequestData,
+          friendsPostRequestData
         );
-        setUserFriends(friends);
-        setPendingFriends(pendingRequest);
+
         navigate("/profile");
       } else {
         console.error(data.message || "Une erreur s'est produite");

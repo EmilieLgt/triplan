@@ -12,7 +12,8 @@ CREATE TABLE travel (
   city VARCHAR(255) NOT NULL,
   date_start DATE NOT NULL,
   date_end DATE NOT NULL,
-  picture VARCHAR(1000) NOT NULL,
+  picture VARCHAR(1000),
+  random VARCHAR (200) UNIQUE NOT NULL,
   state  VARCHAR(255) NOT NULL,
   account_id INT UNSIGNED NOT NULL,
   FOREIGN KEY (account_id) REFERENCES account(id)
@@ -25,7 +26,7 @@ CREATE TABLE activity (
   price VARCHAR(50) NOT NULL,
   neighborhood VARCHAR(250) NOT NULL,
   link VARCHAR(2000) NOT NULL,
-  comment VARCHAR(1000) NOT NULL,
+  comment VARCHAR(1000),
   account_id INT UNSIGNED NOT NULL,
   travel_id INT UNSIGNED NOT NULL,
   FOREIGN KEY (account_id) REFERENCES account(id),

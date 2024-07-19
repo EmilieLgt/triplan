@@ -35,7 +35,7 @@ class AccountRepository extends AbstractRepository {
   }
 
   async researchByLetters(input) {
-    const query = `select firstname, lastname, picture from ${this.table} where firstname like ? OR lastname like ?`;
+    const query = `select id, firstname, lastname, picture from ${this.table} where firstname like ? OR lastname like ?`;
     const likeInput = `%${input}%`;
     const [rows] = await this.database.query(query, [likeInput, likeInput]);
     return rows;
@@ -71,6 +71,7 @@ class AccountRepository extends AbstractRepository {
         a.picture,
         t.id AS travel_id,
         t.city,
+        t.random,
         t.date_start,
         t.date_end,
         t.state

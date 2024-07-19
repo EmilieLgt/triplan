@@ -1,122 +1,117 @@
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { AllContext } from "../../AllContext";
+import NewActivityForm from "./NewActivityForm";
+
 import "./trip.scss";
 
-export default function OneTrip({ user }) {
-  const tripsFake = [
-    {
-      id: 0,
-      trip_picture: "../src/assets/images/paris.jpg",
-      trip_name: "Paris",
-      date_start: "2 septembre 2024",
-      date_end: "7 septembre 2024",
-      status: "planning",
-    },
-  ];
+export default function OneTrip() {
+  const {
+    userTrips,
+    formatDate,
+    userFriends,
+    team,
+    setTeam,
+    user,
+    setAllTeams,
+  } = useContext(AllContext);
 
-  const team = [
-    {
-      id: 0,
-      firtsname: user.results[0].name.first,
-      lastname: user.results[0].name.last,
-      picture: user.results[0].picture.thumbnail,
-    },
-    {
-      id: 1,
-      firtsname: user.results[0].name.first,
-      lastname: user.results[0].name.last,
-      picture: user.results[0].picture.thumbnail,
-    },
-    {
-      id: 2,
-      firtsname: user.results[0].name.first,
-      lastname: user.results[0].name.last,
-      picture: user.results[0].picture.thumbnail,
-    },
-    {
-      id: 0,
-      firtsname: user.results[0].name.first,
-      lastname: user.results[0].name.last,
-      picture: user.results[0].picture.thumbnail,
-    },
-    {
-      id: 0,
-      firtsname: user.results[0].name.first,
-      lastname: user.results[0].name.last,
-      picture: user.results[0].picture.thumbnail,
-    },
-    {
-      id: 0,
-      firtsname: user.results[0].name.first,
-      lastname: user.results[0].name.last,
-      picture: user.results[0].picture.thumbnail,
-    },
-    {
-      id: 0,
-      firtsname: user.results[0].name.first,
-      lastname: user.results[0].name.last,
-      picture: user.results[0].picture.thumbnail,
-    },
-    {
-      id: 0,
-      firtsname: user.results[0].name.first,
-      lastname: user.results[0].name.last,
-      picture: user.results[0].picture.thumbnail,
-    },
-    {
-      id: 0,
-      firtsname: user.results[0].name.first,
-      lastname: user.results[0].name.last,
-      picture: user.results[0].picture.thumbnail,
-    },
-    {
-      id: 0,
-      firtsname: user.results[0].name.first,
-      lastname: user.results[0].name.last,
-      picture: user.results[0].picture.thumbnail,
-    },
-    {
-      id: 0,
-      firtsname: user.results[0].name.first,
-      lastname: user.results[0].name.last,
-      picture: user.results[0].picture.thumbnail,
-    },
-  ];
+  // to get acitivties related to the right trip
+  const [tripActivities, setTripActivities] = useState();
+  const tripId = useParams();
+  const trueId = tripId.id;
 
-  const activities = [
-    {
-      id: 0,
-      activity_name: "Jardin du Luxembourg",
-      activity_type: "Park and nature",
-      price: "Free",
-      neighborhood: "6th arr.",
-      link: "https://www.louvre.fr/visiter/plan-acces-transports",
-    },
-    {
-      id: 1,
-      activity_name: "Centre Pompidou",
-      activity_type: "Art",
-      price: "15€",
-      neighborhood: "4th arr.",
-      link: "https://www.louvre.fr/visiter/plan-acces-transports",
-    },
-    {
-      id: 2,
-      activity_name: "No-Glu",
-      activity_type: "Food",
-      price: "20€-30€",
-      neighborhood: "7th arr.",
-      link: "https://www.louvre.fr/visiter/plan-acces-transports",
-    },
-    {
-      id: 3,
-      activity_name: "Louvres",
-      activity_type: "Art",
-      price: "22€",
-      neighborhood: "1st arr.",
-      link: "https://www.louvre.fr/visiter/plan-acces-transports",
-    },
-  ];
+  const tripChoosen = userTrips.filter((t) => t.id === parseInt(trueId, 10));
+
+  const trip = tripChoosen[0];
+
+  // Deal with opening / closing friends list
+  const [openFriends, setOpenFriends] = useState(false);
+  const openFriendsList = () => {
+    setOpenFriends(true);
+  };
+
+  const closeFriendsList = () => {
+    setOpenFriends(false);
+  };
+
+  // to display travel team
+
+  const addFriendtoTeam = async (id) => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/association`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            account_id: id,
+            travel_id: parseInt(tripId.id, 10),
+          }),
+        }
+      );
+      if (response.status === 201) {
+        console.info("activity added");
+        setOpenFriends(false);
+      } else {
+        console.error("Une erreur s'est produite là");
+      }
+    } catch (err) {
+      console.error("Une erreur s'est produite ici :", err);
+    }
+  };
+
+  useEffect(() => {
+    const callTeam = async () => {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/association/travel?travel_id=${tripId.id}`,
+          {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+
+        const data = await response.json();
+        if (response.status === 200) {
+          setTeam(data);
+          setAllTeams((prevTeams) => ({ ...prevTeams, [tripId.id]: data }));
+          console.info("team completed - success");
+        } else {
+          console.error(data.message || "Une erreur s'est produite");
+        }
+      } catch (err) {
+        console.error(
+          "Une erreur s'est produite ici dans l'appel de la team :",
+          err
+        );
+      }
+    };
+    const callActivities = async () => {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/activity/travel?travel_id=${tripId.id}`,
+          {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+
+        const data = await response.json();
+        if (response.status === 200) {
+          setTripActivities(data);
+          console.info("activities - success");
+        } else {
+          console.error(data.message || "Une erreur s'est produite");
+        }
+      } catch (err) {
+        console.error("Une erreur s'est produite ici :", err);
+      }
+    };
+    callTeam();
+    callActivities();
+  }, [setAllTeams, setTeam, tripId.id]);
+
   return (
     <section className="one-trip-section">
       <h2 className="one-trip-title">
@@ -127,33 +122,74 @@ export default function OneTrip({ user }) {
         </Link>
         Trip planning
       </h2>
-      {tripsFake.map((trip) => (
+      {trip && (
         <div key={trip.id} className="trip-presentation">
           <div className="trip-pres2">
-            <img src={trip.trip_picture} alt="city" />
+            <img src={trip.picture} alt="city" />
             <div className="trip-details">
-              <h4>{trip.trip_name}</h4>
+              <h4>{trip.city}</h4>
               <p className="trip-date">
-                {trip.date_start} - {trip.date_end}
+                {formatDate(trip.date_start)} - {formatDate(trip.date_end)}
               </p>
               <div className="trip-status">{trip.status}</div>
             </div>
           </div>
-
           <div className="trip-friends-trip">
             <h3 className="trip-tiles-orange">trip team</h3>{" "}
             <div className="trip-avatars-container">
-              {team.map((person) => (
-                <img key={person.id} src={person.picture} alt="profile" />
-              ))}{" "}
+              <img key={user.id} src={user.picture} alt="profile" />
+              {team &&
+                team.map((person) => (
+                  <img key={person.id} src={person.picture} alt="profile" />
+                ))}{" "}
             </div>
-            <button type="button" className="add-friend">
+          </div>
+          {openFriends && (
+            <div className="friends-list-container-trip">
+              <h4>Add some friends </h4>
+              {userFriends.map((friend) => (
+                <div
+                  key={friend.account_id2 || friend.account_id1}
+                  className="one-line-friend"
+                >
+                  <img src={friend.picture} alt="friend" /> {friend.firstname}{" "}
+                  {friend.lastname}
+                  <button
+                    type="button"
+                    className="add-friend"
+                    onClick={async () => {
+                      await addFriendtoTeam(
+                        friend.account_id2 || friend.account_id1
+                      );
+                    }}
+                  >
+                    +
+                  </button>
+                </div>
+              ))}
+
+              <button
+                type="button"
+                className="close-btn-friends"
+                onClick={closeFriendsList}
+              >
+                Close
+              </button>
+            </div>
+          )}
+
+          <div>
+            <button
+              type="button"
+              className="add-friend"
+              onClick={openFriendsList}
+            >
               +
             </button>{" "}
+            Add other friends
           </div>
         </div>
-      ))}
-
+      )}{" "}
       <h3 className="trip-tiles-orange" id="activity-title">
         activities
       </h3>
@@ -161,146 +197,205 @@ export default function OneTrip({ user }) {
         <div className="activity-category">
           <h5 className="activities-titles"> 🍕 Food</h5>
           <div className="activities-container">
-            {activities
-              .filter((activity) => activity.activity_type === "Food")
-              .map((activity) => (
-                <div key={activity.id} className="one-activity">
-                  <div className="activity-price">{activity.price}</div>
-                  <span className="one-activity-title">
-                    {activity.activity_name}{" "}
-                  </span>
-                  <span className="one-activity-neigh">
-                    {activity.neighborhood}
-                  </span>
-                  <a
-                    href={activity.link}
-                    target="blank"
-                    className="one-activity-link"
-                  >
-                    More info
-                  </a>
-                </div>
-              ))}
+            {tripActivities &&
+              tripActivities
+                .filter((activity) => activity.category === "Food")
+                .map((activity) => (
+                  <div key={activity.id} className="one-activity">
+                    <div>
+                      <span className="activity-price">{activity.price}</span>
+
+                      <span className="one-activity-title">
+                        {activity.name}{" "}
+                      </span>
+                      <span className="one-activity-neigh">
+                        {activity.neighborhood}
+                      </span>
+                      <a
+                        href={activity.link}
+                        target="blank"
+                        className="one-activity-link"
+                      >
+                        More info
+                      </a>
+                    </div>
+                    <div>
+                      <img src={activity.picture} alt="friendimg" />
+                      <img src="/src/assets/images/comment.svg" alt="comment" />
+                      <div className="comment-one-trip">
+                        {" "}
+                        <p>
+                          {activity.firstname} {activity.lastname} said
+                        </p>
+                        <span>'{activity.comment}' </span>{" "}
+                      </div>
+                    </div>
+                  </div>
+                ))}
           </div>
         </div>
         <div className="activity-category">
           <h5 className="activities-titles"> 🌳 Park and nature</h5>
           <div className="activities-container">
-            {activities
-              .filter(
-                (activity) => activity.activity_type === "Park and nature"
-              )
-              .map((activity) => (
-                <div key={activity.id} className="one-activity">
-                  <div className="activity-price">{activity.price}</div>
-                  <span className="one-activity-title">
-                    {activity.activity_name}{" "}
-                  </span>
-                  <span className="one-activity-neigh">
-                    {activity.neighborhood}
-                  </span>
-                  <a
-                    href={activity.link}
-                    target="blank"
-                    className="one-activity-link"
-                  >
-                    More info
-                  </a>
-                </div>
-              ))}
+            {tripActivities &&
+              tripActivities
+                .filter((activity) => activity.category === "Park and nature")
+                .map((activity) => (
+                  <div key={activity.id} className="one-activity">
+                    <div>
+                      <span className="activity-price">{activity.price}</span>
+
+                      <span className="one-activity-title">
+                        {activity.name}{" "}
+                      </span>
+                      <span className="one-activity-neigh">
+                        {activity.neighborhood}
+                      </span>
+                      <a
+                        href={activity.link}
+                        target="blank"
+                        className="one-activity-link"
+                      >
+                        More info
+                      </a>
+                    </div>
+                    <div>
+                      <img src={activity.picture} alt="friendimg" />
+                      <img src="/src/assets/images/comment.svg" alt="comment" />
+                      <div className="comment-one-trip">
+                        {" "}
+                        <p>
+                          {activity.firstname} {activity.lastname} said
+                        </p>
+                        <span>'{activity.comment}' </span>{" "}
+                      </div>
+                    </div>
+                  </div>
+                ))}
           </div>
         </div>
         <div className="activity-category">
           <h5 className="activities-titles"> 🎨 Art</h5>
           <div className="activities-container">
-            {activities
-              .filter((activity) => activity.activity_type === "Art")
-              .map((activity) => (
-                <div key={activity.id} className="one-activity">
-                  <div className="activity-price">{activity.price}</div>
-                  <span className="one-activity-title">
-                    {activity.activity_name}{" "}
-                  </span>
-                  <span className="one-activity-neigh">
-                    {activity.neighborhood}
-                  </span>
-                  <a
-                    href={activity.link}
-                    target="blank"
-                    className="one-activity-link"
-                  >
-                    More info
-                  </a>
-                </div>
-              ))}
+            {tripActivities &&
+              tripActivities
+                .filter((activity) => activity.category === "Art")
+                .map((activity) => (
+                  <div key={activity.id} className="one-activity">
+                    <div>
+                      <span className="activity-price">{activity.price}</span>
+
+                      <span className="one-activity-title">
+                        {activity.name}{" "}
+                      </span>
+                      <span className="one-activity-neigh">
+                        {activity.neighborhood}
+                      </span>
+                      <a
+                        href={activity.link}
+                        target="blank"
+                        className="one-activity-link"
+                      >
+                        More info
+                      </a>
+                    </div>
+                    <div>
+                      <img src={activity.picture} alt="friendimg" />
+                      <img src="/src/assets/images/comment.svg" alt="comment" />
+                      <div className="comment-one-trip">
+                        {" "}
+                        <p>
+                          {activity.firstname} {activity.lastname} said
+                        </p>
+                        <span>'{activity.comment}' </span>{" "}
+                      </div>
+                    </div>
+                  </div>
+                ))}
           </div>
         </div>{" "}
         <div className="activity-category">
           <h5 className="activities-titles"> 🎫 Event</h5>
           <div className="activities-container">
-            {activities
-              .filter((activity) => activity.activity_type === "Event")
-              .map((activity) => (
-                <div key={activity.id} className="one-activity">
-                  <div className="activity-price">{activity.price}</div>
-                  <span className="one-activity-title">
-                    {activity.activity_name}{" "}
-                  </span>
-                  <span className="one-activity-neigh">
-                    {activity.neighborhood}
-                  </span>
-                  <a
-                    href={activity.link}
-                    target="blank"
-                    className="one-activity-link"
-                  >
-                    More info
-                  </a>
-                </div>
-              ))}
+            {tripActivities &&
+              tripActivities
+                .filter((activity) => activity.category === "Event")
+                .map((activity) => (
+                  <div key={activity.id} className="one-activity">
+                    <div>
+                      <span className="activity-price">{activity.price}</span>
+
+                      <span className="one-activity-title">
+                        {activity.name}{" "}
+                      </span>
+                      <span className="one-activity-neigh">
+                        {activity.neighborhood}
+                      </span>
+                      <a
+                        href={activity.link}
+                        target="blank"
+                        className="one-activity-link"
+                      >
+                        More info
+                      </a>
+                    </div>
+                    <div>
+                      <img src={activity.picture} alt="friendimg" />
+                      <img src="/src/assets/images/comment.svg" alt="comment" />
+                      <div className="comment-one-trip">
+                        {" "}
+                        <p>
+                          {activity.firstname} {activity.lastname} said
+                        </p>
+                        <span>'{activity.comment}' </span>{" "}
+                      </div>
+                    </div>
+                  </div>
+                ))}
           </div>
         </div>
         <div className="activity-category">
           <h5 className="activities-titles"> 🗺️ Other</h5>
           <div className="activities-container">
-            {activities
-              .filter((activity) => activity.activity_type === "Other")
-              .map((activity) => (
-                <div key={activity.id} className="one-activity">
-                  <div className="activity-price">{activity.price}</div>
-                  <span className="one-activity-title">
-                    {activity.activity_name}{" "}
-                  </span>
-                  <span className="one-activity-neigh">
-                    {activity.neighborhood}
-                  </span>
-                  <a
-                    href={activity.link}
-                    target="blank"
-                    className="one-activity-link"
-                  >
-                    More info
-                  </a>
-                </div>
-              ))}
+            {tripActivities &&
+              tripActivities
+                .filter((activity) => activity.category === "Other")
+                .map((activity) => (
+                  <div key={activity.id} className="one-activity">
+                    <div>
+                      <span className="activity-price">{activity.price}</span>
+
+                      <span className="one-activity-title">
+                        {activity.name}{" "}
+                      </span>
+                      <span className="one-activity-neigh">
+                        {activity.neighborhood}
+                      </span>
+                      <a
+                        href={activity.link}
+                        target="blank"
+                        className="one-activity-link"
+                      >
+                        More info
+                      </a>
+                    </div>
+                    <div>
+                      <img src={activity.picture} alt="friendimg" />
+                      <img src="/src/assets/images/comment.svg" alt="comment" />
+                      <div className="comment-one-trip">
+                        {" "}
+                        <p>
+                          {activity.firstname} {activity.lastname} said
+                        </p>
+                        <span>'{activity.comment}' </span>{" "}
+                      </div>
+                    </div>
+                  </div>
+                ))}
           </div>
         </div>
       </div>
+      <NewActivityForm trip={trip} />
     </section>
   );
 }
-OneTrip.propTypes = {
-  user: PropTypes.shape({
-    results: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.shape({
-          first: PropTypes.string.isRequired,
-          last: PropTypes.string.isRequired,
-        }).isRequired,
-        picture: PropTypes.shape({
-          thumbnail: PropTypes.string.isRequired,
-        }).isRequired,
-      })
-    ).isRequired,
-  }).isRequired,
-};

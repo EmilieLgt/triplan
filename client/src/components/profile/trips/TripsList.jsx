@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { AllContext } from "../../../AllContext";
 
 export default function TripsList() {
-  const { userTrips } = useContext(AllContext);
+  const { userTrips, allTeams } = useContext(AllContext);
   const formatDate = (dateString) => {
     if (!dateString) return ""; // Gérer le cas où la date est undefined ou null
     const date = new Date(dateString);
@@ -13,9 +13,10 @@ export default function TripsList() {
     const year = date.getFullYear();
     return `${day}.${month}.${year}`;
   };
+  const trips = Array.isArray(userTrips) ? userTrips : [];
 
-  const planningTrips = userTrips.filter((trip) => trip.state === "planning");
-  const projectTrips = userTrips.filter((trip) => trip.state === "project");
+  const planningTrips = trips.filter((trip) => trip.state === "planning");
+  const projectTrips = trips.filter((trip) => trip.state === "project");
 
   return (
     <>
@@ -28,11 +29,11 @@ export default function TripsList() {
               <div>Plan a new trip</div> <div className="plus-button">+</div>
             </div>
           </Link>
-          {planningTrips.length > 0 ? (
+          {Array.isArray(planningTrips) && planningTrips.length > 0 ? (
             planningTrips.map((trip) => (
               <div key={trip.id} className="trip-list-one-trip">
                 <div className="trip-list-content">
-                  <Link to="/trip">
+                  <Link to={`/trip/${trip.id}`}>
                     <img src={trip.picture} alt="city" />
                   </Link>
                   <div className="trip-list-content">
@@ -45,6 +46,24 @@ export default function TripsList() {
                       {formatDate(trip.date_end)}
                     </p>
                   </div>
+                  <Link to={`/trip/${trip.id}`}>
+                    <div className="trip-team-avatars">
+                      <div>
+                        {allTeams[trip.id] &&
+                          allTeams[trip.id].map((member) => (
+                            <img
+                              key={member.id}
+                              src={member.picture}
+                              alt={member.firstname}
+                              className="team-avatar"
+                            />
+                          ))}{" "}
+                      </div>
+                      <div>
+                        <button type="button">more</button>
+                      </div>
+                    </div>
+                  </Link>
                 </div>
               </div>
             ))
@@ -58,11 +77,11 @@ export default function TripsList() {
         {" "}
         <h2>My drafts</h2>
         <div className="trip-list-all-trips">
-          {projectTrips.length > 0 ? (
+          {Array.isArray(projectTrips) && projectTrips.length ? (
             projectTrips.map((trip) => (
               <div key={trip.id} className="trip-list-one-trip">
                 <div className="trip-list-content">
-                  <Link to="/trip">
+                  <Link to={`/trip/${trip.id}`}>
                     <img src={trip.picture} alt="city" />
                   </Link>
                   <div className="trip-list-content">

@@ -37,6 +37,18 @@ class activityRepository extends AbstractRepository {
     return rows;
   }
 
+  async readWithTravel(travelID) {
+    const [rows] = await this.database.query(
+      `SELECT oa.*, a.firstname, a.lastname, a.picture
+       FROM ${this.table} oa
+       JOIN account a ON oa.account_id = a.id
+       WHERE oa.travel_id = ?`,
+      [travelID]
+    );
+
+    return rows;
+  }
+
   async update(activity) {
     const [result] = await this.database.query(
       `update ${this.table} set name = ?, category = ?, price = ?, neighborhood = ?, link = ? , comment = ?, account_id = ?, travel_id = ? where id = ?`,

@@ -28,6 +28,17 @@ class assocationRepository extends AbstractRepository {
     return rows;
   }
 
+  async readWithTravel(travelId) {
+    const [rows] = await this.database.query(
+      `SELECT a.id, a.picture, a.firstname, a.lastname
+      FROM operation_association oa
+      LEFT JOIN account a ON oa.account_id = a.id
+      WHERE oa.travel_id = ?`,
+      [travelId]
+    );
+    return rows;
+  }
+
   // The D of CRUD - Delete operation
   async delete(id) {
     const [result] = await this.database.query(
